@@ -39,7 +39,15 @@ export default class Data {
         }
     }
 
-
+     /**GET request for specific course */
+     async getCourse(id) {
+        const res = await this.api(`/courses/${id}`, 'GET', null , false, null);
+        if (res.status === 200) {
+            return res.json().then((data) => data);
+        } else {
+            throw new Error();
+        }
+     }
 
     /**GET request to get user info */
     async getUser(username, password) {
@@ -56,4 +64,6 @@ export default class Data {
             throw new Error()
         }
     }
+
+   
 }
