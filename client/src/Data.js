@@ -38,4 +38,22 @@ export default class Data {
             throw new Error();
         }
     }
+
+
+
+    /**GET request to get user info */
+    async getUser(username, password) {
+        const res = await this.api('/users', 'GET', null, true , {
+            username,
+            password
+        });
+
+        if (res.status === 200) {
+            return res.json().then((data) => data)
+        } else if (res.status === 401) {
+            return null;
+        } else {
+            throw new Error()
+        }
+    }
 }
