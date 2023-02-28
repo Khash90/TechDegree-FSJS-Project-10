@@ -21,7 +21,7 @@ export default class Data {
         }
         //check if auth is required
         if (requiresAuth) {
-            const encodedCredentials = btoa(`${credentials.usernam}:${credentials.password}`);
+            const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
 
             options.headers['Authorization'] = `Basic ${encodedCredentials}`
         }
@@ -68,7 +68,7 @@ export default class Data {
     /**POST request to create a new user */
     async createUser(user) {
         const response = await this.api(`/users`, 'POST', user, false, null)
-        
+
         if (response.status === 201) {
           return this.getUser(user.emailAddress, user.password);
         } else if (response.status === 400) {

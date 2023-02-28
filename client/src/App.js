@@ -6,11 +6,13 @@ import Header from "./components/Header";
 import withContext from "./Context";
 import CourseDetail from "./components/CourseDetail";
 import UserSignUp from "./components/UserSignUp";
+import UserSignIn from "./components/UserSignIn";
 
 const CoursesWithContext = withContext(Courses);
 const HeaderWithContext = withContext(Header);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
               <Route path="/" element={<CoursesWithContext />} />
               <Route path="/courses/:id" element={<CourseDetailWithContext />} />
               <Route path="/signup" element={<UserSignUpWithContext />} />
+              <Route path="/signin" element={<UserSignInWithContext />} />
+              
           </Routes>
         }
       </main>
