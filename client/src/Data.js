@@ -66,16 +66,17 @@ export default class Data {
     }
 
     /**POST request to create a new user */
-    async createUser(body) {
-        const res = await this.api(`/users`, 'POST', body,false,null);
-        
-        if (res.status === 201) {
-            return this.getUser(body.emailAddress, body.password);
-        } else if (res.status === 400) {
-            return res.json().then((data) => data.errors);
+    async createUser(user) {
+        const response = await this.api("/users", "POST", user);
+        if (response.status === 201) {
+          return [];
+        } else if (response.status === 400) {
+          return response.json().then((data) => {
+            return data.errors;
+          });
         } else {
-            throw new Error()
+          throw new Error();
         }
-    }
+      }
    
 }
