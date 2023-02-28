@@ -1,47 +1,48 @@
-import React, {useRef,useState} from "react"; 
-import {  useNavigate , NavLink } from "react-router-dom";
-
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function UserSignUp({ context }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
 
-  const firstName = useRef(null);
-  const lastName = useRef(null);
-  const emailAddress = useRef(null);
-  const password = useRef(null);
-
+ 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    //create an object of user
+    e.preventDefault();
     const user = {
-      firstName:firstName.current.value,
-      lastName:lastName.current.value,
-      emailAddress:emailAddress.current.value,
-      password:password.current.value
-    }
-
-    context.data.createUser(user)
-    .then((errors) => {
-      if (errors.length) {
-        setErrors(errors)
+      firstName,
+      lastName,
+      emailAddress: username,
+      password,
+    };
+    context.data.createUser(user).then((res) => {
+      if (res.length) {
+        setErrors(res);
       } else {
-        context.actions.signIn(emailAddress.current.value, password.current.value).then(() => {
-          navigate('/')
-        })
+        context.actions.signIn(user.emailAddress, user.password).then((res) => {
+          
+            if (location.state?.from) {
+              navigate(location.state.from);
+            } else {
+              navigate('/');
+            }
+          
+        });
       }
-    }).catch((err) => console.log(err))
-  }
+    });
+  };
 
-  const handleCancel = () => {
-    navigate('/')
-  }
-
-    return (
-      <div className="form--centered">
+  return (
+    <>
+      <div className='form--centered'>
         <h2>Sign Up</h2>
-        {errors && errors.length ? (
-          <div className="validation--errors">
+        {errors.length ? (
+          <div className='validation--errors'>
             <h3>Validation Errors</h3>
             <ul>
               {errors.map((error, index) => (
@@ -51,51 +52,52 @@ export default function UserSignUp({ context }) {
           </div>
         ) : null}
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor='firstName'>First Name</label>
           <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            defaultValue=""
-            ref={firstName}
+            id='firstName'
+            name='firstName'
+            type='text'
+            onChange={(e) => setFirstName(e.target.value)}
           />
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor='lastName'>Last Name</label>
           <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            defaultValue=""
-            ref={lastName}
+            id='lastName'
+            name='lastName'
+            type='text'
+            onChange={(e) => setLastName(e.target.value)}
           />
-          <label htmlFor="emailAddress">Email Address</label>
+          <label htmlFor='username'>Email Address</label>
           <input
-            id="emailAddress"
-            name="emailAddress"
-            type="email"
-            defaultValue=""
-            ref={emailAddress}
+            id='username'
+            name='username'
+            type='email'
+            onChange={(e) => setUsername(e.target.value)}
           />
-          <label htmlFor="password">Password</label>
+          <label htmlFor='password'>Password</label>
           <input
-            id="password"
-            name="password"
-            type="password"
-            defaultValue=""
-            ref={password}
+            id='password'
+            name='password'
+            type='password'
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="button" type="submit">
+          <button
+            className='button'
+            type='submit'
+          >
             Sign Up
           </button>
-          <button onClick={handleCancel} className="button button-secondary">
+          <Link
+            className='button'
+            to={'/'}
+          >
             Cancel
-          </button>
+          </Link>
         </form>
         <p>
-          {" "}
-          Already have a user account? Click here to{" "}
-          <NavLink to="/signin">sign in</NavLink>!
+          Already have a user account? Click here to{' '}
+          <Link to={'/signin'}>sign in</Link>!
         </p>
       </div>
-    );
-};
-
+    </>
+  );
+}
