@@ -65,5 +65,17 @@ export default class Data {
         }
     }
 
+    /**POST request to create a new user */
+    async createUser(body) {
+        const res = await this.api(`/users`, 'POST', body,false,null);
+        
+        if (res.status === 201) {
+            return this.getUser(body.emailAddress, body.password);
+        } else if (res.status === 400) {
+            return res.json().then((data) => data.errors);
+        } else {
+            throw new Error()
+        }
+    }
    
 }
