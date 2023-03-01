@@ -39,7 +39,7 @@ export class Provider extends React.Component{
 
     signIn = async(username, password) => {
         const user = await this.data.getUser(username, password);
-
+        user.password = password;
         if (user !== null) {
             this.setState(() => {
                 return {

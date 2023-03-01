@@ -46,6 +46,9 @@ export default function  CreateCourse({ context }) {
       estimatedTime,
       materialsNeeded,
     };
+    console.log(context.authenticatedUser.emailAddress)
+    console.log(context.authenticatedUser.password)
+    console.log(body);
 
     await context.data
       .createCourse(
