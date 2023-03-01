@@ -114,6 +114,8 @@ router.post("/courses", authenticateUser, asyncHandler(async(req,res) => {
         const course = await Course.create({
             title: req.body.title,
             description: req.body.description,
+            estimatedTime: req.body.estimatedTime,
+            materialsNeeded: req.body.materialsNeeded,
             userId: user.id,
         });
         res.status(201).location(`courses/${course.id}`).end();

@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 
 export default function CourseDetail({ context }) {
   const { id } = useParams();
-  const [course, setCourse] = useState({});
+  const [course, setCourse] = useState([]);
 
   const navigate = useNavigate();
 
