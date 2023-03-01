@@ -60,7 +60,10 @@ export default function CourseDetail({ context }) {
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name">{course.title}</h4>
               <p>
-                By {context.authenticatedUser.firstName} {context.authenticatedUser.lastName}
+              By{" "}
+                {course.User?.firstName +
+                  " " +
+                  course.User?.lastName}
               </p>
 
               <ReactMarkdown children={course.description} />
