@@ -80,16 +80,30 @@ export default class Data {
 
     /** POST request to create new course */
     async createCourse(body, username, password) {
-      const response = await this.api("/courses", 'POST', body, true, {
+      const res = await this.api("/courses", 'POST', body, true, {
         username,
         password,
       });
-      if (response.status === 201) {
+      if (res.status === 201) {
         return [];
-      } else if (response.status === 400) {
-        return response.json().then((data) => {
+      } else if (res.status === 400) {
+        return res.json().then((data) => {
           return data.errors;
         });
+      } else {
+        throw new Error();
+      }
+    }
+
+    async deleteCourse(id, username, password) {
+      const response = await this.api(`/courses/${id}`, "DELETE", null, true, {
+        username,
+        password,
+      });
+      if (response.status === 204) {
+        return [];
+      } else if (response.status === 401) {
+        return null;
       } else {
         throw new Error();
       }
