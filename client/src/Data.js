@@ -1,6 +1,7 @@
 import apiBaseUrl from './config'
 
 export default class Data {
+  
     api(
         path,
         method= 'GET',
@@ -37,6 +38,7 @@ export default class Data {
         } else {
             throw new Error();
         }
+        
     }
 
      /**GET request for specific course */
@@ -47,6 +49,7 @@ export default class Data {
         } else {
             throw new Error();
         }
+       
      }
 
     /**GET request to get user info */

@@ -11,7 +11,10 @@ export default function UserSignUp({ context }) {
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
 
- 
+  /**
+    send POST request from the form , if 500 is returned or arrays , display error and send user to /error
+    else sign the user in. 
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
@@ -23,10 +26,13 @@ export default function UserSignUp({ context }) {
     context.data.createUser(user).then((res) => {
       if (res.length) {
         setErrors(res);
+      } else if (res === 500){
+        navigate('/error');
       } else {
         context.actions.signIn(user.emailAddress, user.password).then((res) => {
-          
-            if (location.state?.from) {
+            if (res === 500) {
+              navigate('/error')
+            } else if (location.state?.from) {
               navigate(location.state.from);
             } else {
               navigate('/');

@@ -11,6 +11,11 @@ export default function CourseDetail({ context }) {
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
+      if (data === null) {
+        navigate('/notfound')
+      } else if (data === 500) {
+        navigate('/error')
+      }
       setCourse(data);
     });
     // eslint-disable-next-line
@@ -24,7 +29,15 @@ export default function CourseDetail({ context }) {
         context.authenticatedUser.emailAddress,
         context.authenticatedUser.password
       )
-      .then(navigate("/"));
+      .then((res) => {
+        if (res === 204) {
+          navigate('/');
+        } else if (res === 401){
+          navigate('/forbidden');
+        } else {
+          navigate('/error');
+        }
+      });
   };
 
   return (

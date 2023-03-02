@@ -6,12 +6,16 @@ export default function Courses({ context }) {
 
   const navigate = useNavigate();
 
+  /** if fetch courses fail navigate user to /error */
   useEffect(() => {
     context.data.getCourses()
-    .then((res) => setCourses(res))
-    .catch((err) => console.log(err))
-    navigate('/')
-    
+    .then((res) => {
+      if (res === 500) {
+        navigate('/error');
+      } else {
+        setCourses(res);
+      }
+    });
   }, []);
 
   return (

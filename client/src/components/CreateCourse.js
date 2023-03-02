@@ -46,9 +46,9 @@ export default function  CreateCourse({ context }) {
       estimatedTime,
       materialsNeeded,
     };
-    console.log(context.authenticatedUser.emailAddress)
-    console.log(context.authenticatedUser.password)
-    console.log(body);
+    // console.log(context.authenticatedUser.emailAddress)
+    // console.log(context.authenticatedUser.password)
+    // console.log(body);
 
     await context.data
       .createCourse(
@@ -56,17 +56,15 @@ export default function  CreateCourse({ context }) {
         context.authenticatedUser.emailAddress,
         context.authenticatedUser.password
       )
-      .then((errors) => {
+      .then((res) => {
         // errors from response
-        if (errors.length) {
-          setErrors(errors);
+        if (res.length) {
+          setErrors(res);
+        } else if (res === 500) {
+          navigate('/error')
         } else {
-          navigate("/");
+          navigate('/')
         }
-      })
-      .catch((err) => {
-        console.error(err);
-        navigate("/"); // back to home page
       });
   };
   return (

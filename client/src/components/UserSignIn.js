@@ -13,6 +13,8 @@ export default function UserSignIn({ context }) {
     context.actions.signIn(username, password).then((res) => {
       if (res === null) {
         console.log("Sign-In Has Failed!");
+      } else if (res === 500) {
+        navigate('/error');
       } else if (location.state?.from) {
         navigate(location.state.from);
       } else {
