@@ -17,7 +17,7 @@ export default function UpdateCourse({ context }) {
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
-      if (data === null) {
+      if (data === 404) {
         navigate("notfound");
       } else if (data === 500) {
         navigate("/error");
