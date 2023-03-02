@@ -25,8 +25,8 @@ export default function CourseDetail({ context }) {
 
   const handleDeleteCourse = (e) => {
     e.preventDefault();
-    context.data
-      .deleteCourse(
+
+    context.data.deleteCourse(
         id,
         context.authenticatedUser.emailAddress,
         context.authenticatedUser.password
