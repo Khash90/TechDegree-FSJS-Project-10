@@ -9,6 +9,7 @@ import UserSignUp from "./components/UserSignUp";
 import UserSignIn from "./components/UserSignIn";
 import UserSignOut from "./components/UserSignOut";
 import CreateCourse from "./components/CreateCourse";
+import UpdateCourse from "./components/UpdateCourse";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "./components/NotFound";
 import Forbidden from "./components/Forbidden";
@@ -21,6 +22,7 @@ const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
 const CreateCourseWithContext = withContext(CreateCourse);
+const UpdateCourseWithContext = withContext(UpdateCourse);
 
 
 const App = () => {
@@ -30,13 +32,12 @@ const App = () => {
       <main>
         {
           <Routes>
+          
             {/*  Navigates to the course creation page - Route is private and requires authentication. */}
 
             <Route element={<PrivateRoute />}>
-              <Route
-                path="/courses/create"
-                element={<CreateCourseWithContext />}
-              />
+              <Route  path="/courses/create"  element={<CreateCourseWithContext />} />
+            <Route path="/courses/:id/update" element={<UpdateCourseWithContext />} />   
 
             </Route>
 
@@ -54,6 +55,9 @@ const App = () => {
             <Route path="/notfound" element={<NotFound/>} />
             <Route path="/forbidden" element={<Forbidden />} />
             <Route path="/error"  element={<UnhandledError />} />
+
+
+            
 
           </Routes>
         }

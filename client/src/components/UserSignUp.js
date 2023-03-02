@@ -13,7 +13,7 @@ export default function UserSignUp({ context }) {
 
   /**
     send POST request from the form , if 500 is returned or arrays , display error and send user to /error
-    else sign the user in. 
+    else sign the user 
    */
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export default function UserSignUp({ context }) {
             if (res === 500) {
               navigate('/error')
             } else if (location.state?.from) {
-              navigate(location.state.from);
+              navigate(location.state?.from);
             } else {
               navigate('/');
             }
