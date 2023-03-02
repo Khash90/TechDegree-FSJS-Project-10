@@ -14,7 +14,9 @@ export default function  CreateCourse({ context }) {
   const [materialsNeeded, setMaterialsNeeded] = useState("");
   const [errors, setErrors] = useState([]);
   
-
+/** setting values for each part 
+ * title, description , estimated time, materialsNeeded
+ */
  
 
   const handleChange = (event) => {
@@ -35,6 +37,13 @@ export default function  CreateCourse({ context }) {
       return;
     }
   };
+
+
+  /** after submiting form , send a POST request to API
+   * if array is returned, display errors
+   * if 500 is returned , send user to /error
+   * else send user to home '/'
+   */
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -13,7 +13,12 @@ export default function UpdateCourse({ context }) {
   const [materialsNeeded, setMaterialsNeeded] = useState("");
   const [errors, setErrors] = useState("");
 
-  //get courses by their id
+  /** on page load get course details
+   * if data doesnt exist send user to /notfound
+   * else if 500 is returned send user to /error
+   * else if user is owner set course states
+   * else user dont have persmission send to /forbidden
+   */
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
@@ -32,6 +37,7 @@ export default function UpdateCourse({ context }) {
         navigate("/forbidden");
       }
     });
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //update any course data
@@ -51,6 +57,10 @@ export default function UpdateCourse({ context }) {
         context.authenticatedUser.emailAddress,
         context.authenticatedUser.password
       )
+      /**if array returns display errors
+       * else if 500 is returned send user to /error
+       * else send user to home /
+       */
       .then((res) => {
         if (res.length) {
           setErrors(res);

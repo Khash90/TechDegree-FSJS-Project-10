@@ -12,7 +12,10 @@ export default function Header(props) {
           <Link to="/"> Courses </Link>
         </h1>
         <nav>
-          {authUser ? ( // if user is authenticated  sign out option
+          {
+            /**if user is authenticated '?' display user's name and signout
+             */
+            authUser ? ( // if user is authenticated  sign out option
             <ul className="header--signedin">
               <li>{`Welcome, ${authUser.firstName} ${authUser.lastName}!`}</li>
               <li>

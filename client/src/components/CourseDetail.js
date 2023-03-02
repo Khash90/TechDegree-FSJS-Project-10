@@ -9,6 +9,11 @@ export default function CourseDetail({ context }) {
 
   const navigate = useNavigate();
 
+/** on page load , fetching course details with Id para
+ * if data doesnt exist , send user to /notfound
+ * if 500 returned , send user to /error
+ * else show the course details
+ */
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
       if (data === 404) {
@@ -20,8 +25,15 @@ export default function CourseDetail({ context }) {
       }
       
     });
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
+/** Sendeing DELETE request to the api to delete the course
+ * if it was successfully done , take user home '/'
+ * if unauthorised or forbidden send use to /forbidden,
+ * else send user to /error
+ */
 
   const handleDeleteCourse = (e) => {
     e.preventDefault();
@@ -46,7 +58,9 @@ export default function CourseDetail({ context }) {
   return (
     <main>
       <div className="actions--bar">
-        {context.authenticatedUser &&
+        {
+          //displaying update and delete buttons only if user is authenticated.
+          context.authenticatedUser &&
         context.authenticatedUser.id === course.userId ? (
           <div className="wrap">
             <Link className="button" to="update">

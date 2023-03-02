@@ -16,6 +16,7 @@ export default function Courses({ context }) {
         setCourses(res);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -12,7 +12,8 @@ export default function UserSignUp({ context }) {
   const [errors, setErrors] = useState([]);
 
   /**
-    send POST request from the form , if 500 is returned or arrays , display error and send user to /error
+    send POST request from the form , 
+    if 500 is returned or arrays , display error and send user to /error
     else sign the user 
    */
   const handleSubmit = (e) => {

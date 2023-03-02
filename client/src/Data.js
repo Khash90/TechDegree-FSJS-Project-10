@@ -97,7 +97,8 @@ export default class Data {
         throw new Error();
       }
     }
-
+    
+    /** PUT request to api to update a course */
     async updateCourse(id, body, username, password) {
       const res = await this.api(`/courses/${id}`, "PUT", body, true, {
         username,
@@ -114,6 +115,7 @@ export default class Data {
       }
     }
 
+    /** DELETE request to api to delete a course */
     async deleteCourse(id, username, password) {
       const res = await this.api(`/courses/${id}`, "DELETE", null, true, {
         username,
