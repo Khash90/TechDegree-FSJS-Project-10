@@ -15,8 +15,10 @@ export default function CourseDetail({ context }) {
         navigate('/notfound')
       } else if (data === 500) {
         navigate('/error')
+      } else {
+        setCourse(data);
       }
-      setCourse(data);
+      
     });
     // eslint-disable-next-line
   }, []);
@@ -30,6 +32,7 @@ export default function CourseDetail({ context }) {
         context.authenticatedUser.password
       )
       .then((res) => {
+        
         if (res === 204) {
           navigate('/');
         } else if (res === 401){
