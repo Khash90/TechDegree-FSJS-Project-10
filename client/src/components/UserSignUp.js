@@ -26,8 +26,6 @@ export default function UserSignUp({ context }) {
     context.data.createUser(user).then((res) => {
       if (res.length) {
         setErrors(res);
-      } else if (res === 500){
-        navigate('/error');
       } else {
         context.actions.signIn(user.emailAddress, user.password).then((res) => {
             if (res === 500) {

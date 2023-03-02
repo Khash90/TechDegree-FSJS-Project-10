@@ -47,7 +47,7 @@ export default class Data {
         if (res.status === 200) {
             return res.json().then((data) => data);
         } else {
-            throw new Error();
+            return res.status;
         }
        
      }
