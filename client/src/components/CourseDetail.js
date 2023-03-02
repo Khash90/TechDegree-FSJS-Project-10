@@ -11,7 +11,7 @@ export default function CourseDetail({ context }) {
 
   useEffect(() => {
     context.data.getCourse(id).then((data) => {
-      if (data === null) {
+      if (data.status === 404) {
         navigate('/notfound')
       } else if (data === 500) {
         navigate('/error')
@@ -20,7 +20,7 @@ export default function CourseDetail({ context }) {
       }
       
     });
-    // eslint-disable-next-line
+    
   }, []);
 
   const handleDeleteCourse = (e) => {
