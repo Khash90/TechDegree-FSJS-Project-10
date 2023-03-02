@@ -52,9 +52,9 @@ export default function CourseDetail({ context }) {
             <Link className="button" to="update">
               Update Course{" "}
             </Link>
-            <Link className="button" onClick={handleDeleteCourse}>
+            <button className="button" onClick={handleDeleteCourse}>
               Delete Course
-            </Link>
+            </button>
             <Link className="button button-secondary" to="/">
               Return to List
             </Link>

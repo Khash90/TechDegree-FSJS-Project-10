@@ -120,9 +120,9 @@ export default class Data {
         password,
       });
       if (res.status === 204) {
-        return [];
+        return res.status;
       } else if (res.status === 401) {
-        return null;
+        return res.status;
       } else {
         throw new Error();
       }
