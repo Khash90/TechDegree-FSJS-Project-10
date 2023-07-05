@@ -14,7 +14,7 @@
  The course management system that was developed as part of FullStack JavaScript TechDegree at Team Treehouse. the project has built in React.js and Node.js and Express.js as backened to allow users to sign up , sign in , create course records which are added to database configured with Sequelize ORM. 
  The server-side REST API includes authentication middleware.
 
- Authenticated User amd validations are offered in this project both on front-end and server-side as well as within the database configuration.
+ Authenticated User and validations are offered in this project both on front-end and server-side as well as within the database configuration.
 
  this project fetch the api from api folder which made with express and available for testing in POSTMAN application as well.
 
